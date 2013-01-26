@@ -1,0 +1,20 @@
+<script type="text/javascript">
+  // Bootstrap you expression editor
+  UT.Expression.ready(function(expression){
+    expression.container.resizeHeight(500);
+    var root = expression.getElement();
+    var cheersPict = expression.storage.cheersPict;
+    displayPict();
+
+    function displayPict(){
+      var img = new Image();
+      img.onload = function(event){
+        root.innerHTML = '';
+        img.className = 'cheersPict'
+        root.appendChild(img);
+        expression.container.resizeHeight(img.offsetHeight);
+      };
+      img.src = cheersPict.url;
+    }
+  });
+</script>

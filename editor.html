@@ -1,0 +1,49 @@
+<script type="text/javascript">
+  // Bootstrap you expression editor
+  UT.Expression.ready(function(expression){
+    var root = expression.getElement();
+    var cheersPict = expression.storage.cheersPict;
+
+    if(cheersPict){
+      displayPict();
+    } else {
+      takePict();
+    }
+
+    function takePict(){
+      expression.readyToPost(false);
+      expression.medias.imageDialog({
+        defaultType: 'camera',
+        size: {
+          width: root.offsetWidth,
+          height: root.offsetHeight,
+          autoCrop: false
+        }
+      }, function(pict){
+        cheersPict = pict;
+        expression.storage.cheersPict = cheersPict;
+        expression.storage.save();
+        displayPict();
+      });
+    }
+
+    function displayPict(){
+      var img = new Image();
+      expression.readyToPost(true);
+      img.onload = function(event){
+        root.innerHTML = '';
+        root.appendChild(img);
+      };
+      img.className = 'cheersPict'
+      expression.readyToPost(true);
+      img.src = cheersPict.url;
+      img.onclick = function(){
+        takePict();
+      }
+    }
+
+    expression.post(function(){
+      expression.setNote('Long life #urturn !')
+    });
+  });
+</script>

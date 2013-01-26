@@ -1,0 +1,9 @@
+{
+  "title":"Cheers",
+  "system_name":"cheers",
+  "version":"1.0.5",
+  "dependencies": [{
+    "type":"stylesheet",
+    "path":"cheers.css"
+    }]
+}
